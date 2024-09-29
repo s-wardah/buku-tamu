@@ -68,7 +68,7 @@ include_once('templates/header.php');
                                 <td><?= $tamu['no_hp'] ?></td>
                                 <td><?= $tamu['bertemu'] ?></td>
                                 <td><?= $tamu['kepentingan'] ?></td>
-                                <td><button class="btn btn-success" type="button">Ubah</button>
+                                <td><a class="btn btn-success" href="edit-tamu.php?id=<?= $tamu['id_tamu'] ?>">Ubah</a>
                                     <button class="btn btn-danger" type="button">Hapus</button>
                                 </td>
                             </tr>
@@ -114,10 +114,10 @@ $kodeTamu = $huruf . sprintf('%03s', $urutan);
             <div class="modal-body">
                 <form method="post" action="">
                     <input type="hidden" name="id_tamu" id="id_tamu" value="<?= $kodeTamu ?>">
-                    <div class="form-group-row">
+                    <div class="form-group row">
                         <label for="nama_tamu" class="col-sm-3 col-form-label">Nama Tamu</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="nama_tamu" name="nama_tamu">
+                            <input type="text" id="nama_tamu" class="form-control" name="nama_tamu">
                         </div>
                     </div>
                     <div class="form-group row">
