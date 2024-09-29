@@ -80,7 +80,7 @@ $data = mysqli_fetch_array($query);
 $kodeuser = $data['kodeTerbesar'];
 
 // mengambil angka dari kode barang terbesar, menggunakan fungsi substr dan diubah ke integer dengan (int)
-$urutan = (int) substr($kodeuser, 2, 3);
+$urutan = (int) substr($kodeuser, 3, 2);
 
 // nomor yang diambil akan ditambah 1 untuk menentukan nomor urut berikutnya
 $urutan++;
