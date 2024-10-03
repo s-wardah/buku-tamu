@@ -1,6 +1,14 @@
 <?php
 require_once('function.php');
 include_once('templates/header.php');
+
+if (isset($_SESSION['role']) && isset($_SESSION['username'])) {
+    // Memeriksa peran pengguna
+    if ($_SESSION['role'] !== 'operator') {
+        echo "<script>alert('Kamu tidak bisa mengakses halaman ini')</script>";
+        echo "<script>window.location.href='index.php'</script>";
+    }
+}
 ?>
 
 <!-- Begin Page Content -->
