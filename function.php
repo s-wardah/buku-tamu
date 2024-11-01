@@ -28,7 +28,14 @@ function tambah_tamu($data)
     $bertemu    = htmlspecialchars($data["bertemu"]);
     $kepentingan = htmlspecialchars($data["kepentingan"]);
 
-    $query = "INSERT INTO buku_tamu VALUES ('$kode', '$tanggal', '$nama_tamu', '$alamat', '$no_hp', '$bertemu', '$kepentingan')";
+    //  upload gambar
+    $gambar = uploadGambar();
+    // cek jika tidak ada gambar
+    if (!$gambar) {
+        return false;
+    }
+
+    $query = "INSERT INTO buku_tamu VALUES ('$kode', '$tanggal', '$nama_tamu', '$alamat', '$no_hp', '$bertemu', '$kepentingan', '$gambar')";
 
     mysqli_query($koneksi, $query);
 
@@ -134,4 +141,52 @@ function ganti_password($data)
     mysqli_query($koneksi, $query);
 
     return mysqli_affected_rows($koneksi);
+}
+
+function uploadGambar()
+{
+    //ambil data file gambar dari variable $_FILES
+    $namaFile = $_FILES['gambar']['name'];
+    $ukuranFile = $_FILES['gambar']['size'];
+    $error = $_FILES['gambar']['error'];
+    $tmpName = $_FILES['gambar']['tmp_name'];
+
+    //cek apakah tidak ada gambar yang di unggah
+
+    if ($error === 4) {
+        echo "<script>
+                alert('pilih gambar terlebih dahulu!');
+            </script>";
+        return false;
+    }
+
+    //cek apakah yang di unggah adalah file gambar
+    $ekstensiGambarValid = ['jpg', 'png', 'jpeg'];
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+        echo "<script>
+                alert('File yang diunggah harus bergambar!);        
+        </script>";
+        return false;
+    }
+
+    //cek jika ukuran file terlalu besar
+    if ($ukuranFile > 1000000) {
+        echo "<script>
+            alert('Ukuran Gambar terlalu besar!');
+            </script>";
+        return false;
+    }
+
+    //jika lolos pengecekan, gambar akan di unggah
+    //generate nama gambar baru dengan uniqid()
+
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+
+    move_uploaded_file($tmpName, 'assets/upload_gambar/' . $namaFileBaru);
+
+    return $namaFileBaru;
 }

@@ -57,6 +57,7 @@ if (isset($_SESSION['role']) && isset($_SESSION['username'])) {
                             <th>No. Telp/HP</th>
                             <th>Bertemu Dengan</th>
                             <th>Kepentingan</th>
+                            <th>Gambar</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -76,6 +77,7 @@ if (isset($_SESSION['role']) && isset($_SESSION['username'])) {
                                 <td><?= $tamu['no_hp'] ?></td>
                                 <td><?= $tamu['bertemu'] ?></td>
                                 <td><?= $tamu['kepentingan'] ?></td>
+                                <td><?= $tamu['gambar'] ?></td>
                                 <td><a class="btn btn-success" href="edit-tamu.php?id=<?= $tamu['id_tamu'] ?>">Ubah</a>
                                     <a onclick="confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger" href="hapus-tamu.php?id=<?= $tamu['id_tamu'] ?>">Hapus</a>
                                 </td>
@@ -122,7 +124,8 @@ $kodeTamu = $huruf . sprintf('%03s', $urutan);
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="">
+                <form method="post" action=""
+                enctype="multipart/form-data">
                     <input type="hidden" name="id_tamu" id="id_tamu" value="<?= $kodeTamu ?>">
                     <div class="form-group row">
                         <label for="nama_tamu" class="col-sm-3 col-form-label">Nama Tamu</label>
@@ -152,6 +155,13 @@ $kodeTamu = $huruf . sprintf('%03s', $urutan);
                         <label for="kepentingan" class="col-sm-3 col-form-label">Kepentingan</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="kepentingan" name="kepentingan">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="gambar" class="col-sm-3 col-form-label">Unggah Foto</label>
+                        <div class="custom-file col-sm-8">
+                            <input type="file" class="custom-file-input" id="gambar" name="gambar">
+                            <label class="custom-file-label" for="gambar">Choose File</label>
                         </div>
                     </div>
             </div>
