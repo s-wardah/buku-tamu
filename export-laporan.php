@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 $spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet(); 
+$sheet = $spreadsheet->getActiveSheet();
 
 $sheet->setCellValue('A1', 'NO');
 $sheet->setCellValue('B1', 'TANGGAL');
@@ -33,11 +33,10 @@ while ($d = mysqli_fetch_array($data)) {
     $sheet->setCellValue('D' . $i, $d['alamat']);
     $sheet->setCellValue('E' . $i, $d['no_hp']);
     $sheet->setCellValue('F' . $i, $d['bertemu']);
-    $sheet->setCellValue('G' . $i, $d['kepentingan']); 
+    $sheet->setCellValue('G' . $i, $d['kepentingan']);
     $i++;
 }
 
 $writer = new Xlsx($spreadsheet);
-$writer->save('Laporan_Buku_Tamu.xlsx'); 
+$writer->save('Laporan_Buku_Tamu.xlsx');
 echo "<script>window.location = 'Laporan_Buku_Tamu.xlsx'</script>";
-?>
